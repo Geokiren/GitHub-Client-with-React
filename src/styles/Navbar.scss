@@ -1,0 +1,28 @@
+$base-color: #61dbfb;
+$background-color: #1f202d;
+
+.navbar {
+  z-index: 100;
+  position: fixed;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 30px;
+  width: 100%;
+  background-color: $background-color;
+  top: 0;
+  left: 0;
+  text-align: center;
+  color: $base-color;
+
+  .navlink {
+    margin: 4px;
+    color: $base-color;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    opacity: 0.6;
+  }
+
+  .navlink.navlink-active {
+    opacity: 1;
+  }
+}

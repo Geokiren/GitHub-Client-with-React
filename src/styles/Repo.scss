@@ -1,0 +1,33 @@
+.repo {
+  background-color: #242533;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  margin: 1rem;
+  padding: 1rem;
+  width: 360px;
+  text-align: center;
+
+  .full-name.repo-item {
+    border-bottom: 1px solid white;
+    padding: 6px;
+    margin: 0 0 10px 0;
+    letter-spacing: 4px;
+  }
+
+  .repo-info {
+    margin: 20px 0;
+
+    .repo-item {
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+  }
+
+  h4 {
+    margin: 10px 0;
+  }
+
+  .divider {
+    border-bottom: 1px solid white;
+  }
+}

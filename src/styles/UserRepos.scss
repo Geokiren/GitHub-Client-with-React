@@ -1,0 +1,118 @@
+#repos {
+  position: fixed;
+  top: 53%;
+  left: 50%;
+  width: 85%;
+  // height: 85%;
+  margin: 20px auto;
+  padding: 0 80px 80px 80px;
+  z-index: 100;
+  background-color: #393b51;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  #title {
+    border-bottom: 2px solid white;
+    width: 85%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  #close {
+    position: absolute;
+    width: 60px;
+    text-align: right;
+    top: 0;
+    right: 10px;
+    color: #61dbfb;
+    font-size: 60px;
+    cursor: pointer;
+    -webkit-transition: -webkit-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+  }
+
+  #close:hover {
+    -webkit-transform: scale(1.01);
+    transform: scale(1.01);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+  @media screen and (max-width: 1024px) {
+    #close {
+      position: sticky;
+      width: 100%;
+      text-align: right;
+    }
+
+    #title {
+      padding: 0 10px 10px 10px;
+      margin: 0 20px 20px 20px;
+    }
+  }
+
+  #repos-container {
+    .repos-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+#pagination-container {
+  margin: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  position: initial;
+  bottom: 0;
+  z-index: 100;
+
+  .pagination {
+    width: 150px;
+    padding: 10px;
+    margin: 0 20px;
+    font-size: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border: 0;
+    border-radius: 10px;
+    color: #61dbfb;
+    background-color: #323347;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .pagination.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .pagination:hover {
+    transform: scale(1.01);
+  }
+
+  #page {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    background-color: #323347;
+    width: 50px;
+    color: #61dbfb;
+    font-size: 30px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .pagination {
+      width: 80px;
+      font-size: 16px;
+    }
+  }
+}

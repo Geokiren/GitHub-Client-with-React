@@ -1,0 +1,17 @@
+.no-followees {
+  position: relative;
+  top: 300px;
+  color: white;
+  text-align: center;
+  font-size: 50px;
+  letter-spacing: 4px;
+}
+
+.followees {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 100px;
+}

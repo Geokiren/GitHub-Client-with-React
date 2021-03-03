@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import User from './User';
-import LazyUser from './LazyUser';
 import Observer from './Observer';
 import '../styles/Home.scss';
 import UserRepos from './UserRepos';
-// const User = React.lazy(() => import('./User'));
-// // const Observer = React.lazy(() => import('./Observer'));
 
 const Home = () => {
   const [ users, setUsers] = useState(() => []);
@@ -15,6 +12,15 @@ const Home = () => {
   const [ showRepo, setShowRepo ] = useState(false);
 
   useEffect(() => {
+    const getUsers = async (page) => {
+      setRenderObserver(false);
+      const usersFromServer = await fetchUsers(page);
+      const newUsersArray = [...users, ...usersFromServer];
+      setUsers(newUsersArray);
+      setTimeout(() => {
+        setRenderObserver(true);
+      }, 500);   
+    }
     getUsers(page);
   }, [page]);
 
@@ -28,17 +34,6 @@ const Home = () => {
     return items;
   }
 
-  const getUsers = async (page) => {
-    setRenderObserver(false);
-    const usersFromServer = await fetchUsers(page);
-    const newUsersArray = [...users, ...usersFromServer];
-    setUsers(newUsersArray);
-    setTimeout(() => {
-      setRenderObserver(true);
-    }, 300);
-    
-  }
-  
   const handleObserver = () => {
     setPage(prevPage => prevPage + 1);
   }
@@ -60,7 +55,7 @@ const Home = () => {
   return (
     <div className='home'>
       <div id="user-list">
-        {users.map((user) => (!showRepo &&<User key={user.id} user={user} updateRepo={updateRepo} />))}
+        {users.map((user) => (!showRepo &&<User key={user.id} user={user} updateRepo={updateRepo} fetching={true} />))}
       </div>
       { renderObserver && (<Observer onChange={handleObserver} />)}
       { showRepo  && <UserRepos repo={repo} closeRepos={closeRepos} /> }

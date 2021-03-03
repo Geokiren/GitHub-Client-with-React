@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route  } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
-import Followers from './components/Followers'
+import Following from './components/Following'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Navbar />
         <Route path='/' exact component={Home} />
-        <Route path='/followers' component={Followers} />
+        <Route path='/following' component={Following} />
       </Router>
     </div>
   );

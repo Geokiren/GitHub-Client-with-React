@@ -28,8 +28,6 @@ const UserRepos = ({ repo, closeRepos }) => {
     setPage(old => old - 1);
   }
 
-
-  
   return (
     <div id="repos-outer">
         <div id="repos">

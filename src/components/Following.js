@@ -11,9 +11,11 @@ const Following = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState('');
+  const [isLastPage, updateIsLastPage] = useState(false);
 
   useEffect(() => {
     filterFollowees();
+    updateIsLastPage(old => page >= Math.ceil(followees.length / pageSize));
   }, [orderBy, order, page, pageSize])
 
   const filterFollowees = () => {
@@ -69,6 +71,18 @@ const Following = () => {
     setSearch(old => e.target.value);
   }
 
+  const previousPage = () => {
+    if(page > 1) {
+      setPage(old => old - 1);
+    }
+  }
+
+  const nextPage = () => {
+    if(page < Math.ceil(followees.length / pageSize)) {
+      setPage(old => old + 1);
+    }
+  }
+  
 
   return (
     <div id='following'>
@@ -77,10 +91,15 @@ const Following = () => {
         <CustomSelect options={['Ascending', 'Descending']} def={'Descending'} func={changeOrder} />
         <CustomSelect options={[2, 5, 10]} def={10} func={changePageSize} /> 
         <input className="input-filter" placeholder="Search" onChange={changeSearch} />
-    </div>
+      </div>
       <div className='followees'>
         {followees.length > 0 ? filterFollowees().map((followee) => (<User key={followee.id} user={followee} fetching={false} />)) :
         (<div className='no-followees'>You do not follow anyone yet...</div>)}
+      </div>
+      <div id="pagination-container">
+        <button id="previous"  className={`pagination ${page <= 1 ? 'disabled' : ''}`} onClick={previousPage}>Previous</button>
+        <div id="page">{ page }</div>
+        <button id="next"  className={`pagination ${isLastPage ? 'disabled' : ''}`} onClick={nextPage}>Next</button>
       </div>
     </div>
     

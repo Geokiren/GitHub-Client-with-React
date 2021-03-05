@@ -1,0 +1,66 @@
+$base-color: #61dbfb;
+
+.custom-select {
+  position: relative;
+  width: 400px;
+  text-align: left;
+  outline: none;
+  height: 47px;
+  line-height: 47px;
+  margin: 10px;
+
+  .selected {
+    background-color: #0a0a0a;
+    border-radius: 6px;
+    border: 1px solid #666666;
+    color: $base-color;
+    padding-left: 1em;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .selected.open {
+    border: 1px solid $base-color;
+    border-radius: 6px 6px 0px 0px;
+  }
+
+  .selected:after {
+    position: absolute;
+    content: "";
+    top: 22px;
+    right: 1em;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-color: #fff transparent transparent transparent;
+  }
+
+  .items {
+    color: $base-color;
+    border-radius: 0px 0px 6px 6px;
+    overflow: hidden;
+    border-right: 1px solid $base-color;
+    border-left: 1px solid $base-color;
+    border-bottom: 1px solid $base-color;
+    position: absolute;
+    background-color: #0a0a0a;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  .items .option {
+    color: $base-color;
+    padding-left: 1em;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .items .option:hover {
+    background-color: #393b51;
+  }
+
+  .selectHide {
+    display: none;
+  }
+}

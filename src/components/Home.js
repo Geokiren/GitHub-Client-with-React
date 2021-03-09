@@ -39,6 +39,7 @@ const Home = () => {
   }
 
   const updateRepo = (repo) => {
+    setRenderObserver(false);
     setShowRepo(true);
     const updatedRepo = {
       username: repo.username,
@@ -48,6 +49,9 @@ const Home = () => {
   }
 
   const closeRepos = () => {
+    setTimeout(() => {
+      setRenderObserver(true);
+    }, 500); 
     setShowRepo(false);
   }
   

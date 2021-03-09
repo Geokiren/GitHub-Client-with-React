@@ -22,9 +22,10 @@ const Observer = ({ onChange }) => {
   }, [ref]);
 
   const style = {
-    height: '2px',
+    height: '1px',
     position: 'relative',
-    bottom: '100px'
+    bottom: '100px',
+    border: '2px solid white'
   }
 
   return (

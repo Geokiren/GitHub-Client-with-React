@@ -15,7 +15,11 @@ const UserRepos = ({ repo, closeRepos }) => {
   }, [page])
 
   const fetchRepos = async () => {
-    const res = await fetch(`https://api.github.com/users/${repo.username}/repos?sort=updated&type=owner&direction=desc&page=${page}&per_page=10`);
+    const res = await fetch(`https://api.github.com/users/${repo.username}/repos?sort=updated&type=owner&direction=desc&page=${page}&per_page=10`, {
+      headers: {
+        'Authorization': 'Basic ' + Buffer.from(`${process.env.REACT_APP_GITHUB_USERNAME}:${process.env.REACT_APP_GITHUB_KEY}`).toString('base64')
+      }
+    });
     const data = await res.json();
     return data;
   }
@@ -35,7 +39,7 @@ const UserRepos = ({ repo, closeRepos }) => {
             <h1 id="title">{ repo.name }'s Repos</h1>
             <div id="repos-container">
                 <div className="repos-list">
-                  {repos.map((rep) => (<Repo repo={rep} key={rep.id} />))}
+                  {repos.length > 0 && repos.map((rep) => (<Repo repo={rep} key={rep.id} />))}
                 </div>
             </div>
             <div id="pagination-container">

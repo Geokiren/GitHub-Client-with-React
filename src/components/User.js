@@ -26,16 +26,20 @@ const User = ({ user, updateRepo, fetching }) => {
 
   const fetchUserDetails = async ( url ) => {
     setLoading(true);
-    const res = await fetch(url, {
-      headers: {
-        'Authorization': 'Basic ' + Buffer.from("geokiren:8a79539b4d07f8d99644ce53881b5229d3712e83").toString('base64')
-      },
-    });
-    const data = await res.json();
-    setTimeout(() => {
-      setLoading(false);
-    }, 5);
-    return data;
+    try {
+      const res = await fetch(url, {
+        headers: {
+          'Authorization': 'Basic ' + Buffer.from(`${process.env.REACT_APP_GITHUB_USERNAME}:${process.env.REACT_APP_GITHUB_KEY}`).toString('base64')
+        },
+      });
+      const data = await res.json();
+      setTimeout(() => {
+        setLoading(false);
+      }, 5);
+      return data;
+  } catch (err) {
+    console.log(err.message)
+  }
   };
 
   const followUser = (e) => {

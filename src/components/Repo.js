@@ -18,13 +18,17 @@ const Repo = ({ repo }) => {
   }, [])
 
   const fetchRepoInfo = async () => {
-    const res = await fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.full_name.split('/')[1]}`, {
-      headers: {
-        'Authorization': 'Basic ' + Buffer.from(`${process.env.REACT_APP_GITHUB_USERNAME}:${process.env.REACT_APP_GITHUB_KEY}`).toString('base64')
-      }
-    });
-    const data = await res.json();
-    return data;
+    try {
+      const res = await fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.full_name.split('/')[1]}`, {
+        headers: {
+          'Authorization': 'Basic ' + Buffer.from(`${process.env.REACT_APP_GITHUB_USERNAME}:${process.env.REACT_APP_GITHUB_KEY}`).toString('base64')
+        }
+      });
+      const data = await res.json();
+      return data;
+  } catch(err) {
+    console.log(err.message)
+  }
   }
 
   return (
@@ -39,7 +43,7 @@ const Repo = ({ repo }) => {
       </div>
       <div className="divider"></div>
       <h4>Description</h4>
-      <div className="description repo-item">{ repo.description }</div>
+      <div className="description repo-item">{ repo.description || 'N/A' }</div>
     </div>)}
     </>
   )

@@ -24,8 +24,7 @@ const Observer = ({ onChange }) => {
   const style = {
     height: '1px',
     position: 'relative',
-    bottom: '100px',
-    border: '2px solid white'
+    bottom: '100px'
   }
 
   return (

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import User from './User';
 import CustomSelect from './CustomSelect';
+import UserRepos from './UserRepos';
 import '../styles/Following.scss';
 
 const Following = () => {
@@ -12,6 +13,8 @@ const Following = () => {
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState('');
   const [isLastPage, updateIsLastPage] = useState(false);
+  const [ repo, setRepo ] = useState({});
+  const [ showRepo, setShowRepo ] = useState(false);
 
   useEffect(() => {
     filterFollowees();
@@ -82,8 +85,20 @@ const Following = () => {
       setPage(old => old + 1);
     }
   }
-  
 
+  const updateRepo = (repo) => {
+    setShowRepo(true);
+    const updatedRepo = {
+      username: repo.username,
+      name: repo.name
+    }
+    setRepo(repo => updatedRepo);
+  }
+
+  const closeRepos = () => { 
+    setShowRepo(false);
+  }
+  
   return (
     <div id='following'>
       <div id="filters">
@@ -93,7 +108,7 @@ const Following = () => {
         <input className="input-filter" placeholder="Search" onChange={changeSearch} />
       </div>
       <div className='followees'>
-        {followees.length > 0 ? filterFollowees().map((followee) => (<User key={followee.id} user={followee} fetching={false} />)) :
+        {followees.length > 0 ? filterFollowees().map((followee) => (!showRepo && <User key={followee.id} user={followee} updateRepo={updateRepo} fetching={false} />)) :
         (<div className='no-followees'>You do not follow anyone yet...</div>)}
       </div>
       <div id="pagination-container">
@@ -101,6 +116,7 @@ const Following = () => {
         <div id="page">{ page }</div>
         <button id="next"  className={`pagination ${isLastPage ? 'disabled' : ''}`} onClick={nextPage}>Next</button>
       </div>
+      { showRepo  && <UserRepos repo={repo} closeRepos={closeRepos} /> }
     </div>
     
   )

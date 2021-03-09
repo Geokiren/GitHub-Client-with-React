@@ -1,0 +1,18 @@
+.error {
+  margin: 50px auto 0 auto;
+  color: #61dbfb;
+  letter-spacing: 2px;
+  text-align: center;
+
+  .error-symbol {
+    font-size: 80px;
+  }
+
+  .error-message {
+    font-size: 60px;
+  }
+
+  .advice {
+    font-size: 20px;
+  }
+}

@@ -4,6 +4,7 @@ import User from './User';
 import CustomSelect from './CustomSelect';
 import UserRepos from './UserRepos';
 import '../styles/Following.scss';
+import Pagination from './Pagination';
 
 const Following = () => {
   const followees = useSelector(state => state.followees);
@@ -111,11 +112,7 @@ const Following = () => {
         {followees.length > 0 ? filterFollowees().map((followee) => (!showRepo && <User key={followee.id} user={followee} updateRepo={updateRepo} fetching={false} />)) :
         (<div className='no-followees'>You do not follow anyone yet...</div>)}
       </div>
-      <div id="pagination-container">
-        <button id="previous"  className={`pagination ${page <= 1 ? 'disabled' : ''}`} onClick={previousPage}>Previous</button>
-        <div id="page">{ page }</div>
-        <button id="next"  className={`pagination ${isLastPage ? 'disabled' : ''}`} onClick={nextPage}>Next</button>
-      </div>
+      <Pagination page={page} noOfPages={Math.ceil(followees.length / pageSize)} isLastPage={isLastPage} nextPage={nextPage} previousPage={previousPage} />
       { showRepo  && <UserRepos repo={repo} closeRepos={closeRepos} /> }
     </div>
     

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Repo from './Repo';
 import Error from './Error';
+import Pagination from './Pagination';
 import '../styles/UserRepos.scss';
  
 const UserRepos = ({ repo, closeRepos }) => {
@@ -32,12 +33,14 @@ const UserRepos = ({ repo, closeRepos }) => {
   }
   }
 
-  const nextPage = () => {
-    setPage(old => old + 1);
+  const previousPage = () => {
+    if(page > 1) {
+      setPage(old => old - 1);
+    }
   }
 
-  const previousPage = () => {
-    setPage(old => old - 1);
+  const nextPage = () => {
+    setPage(old => old + 1);
   }
 
   return (
@@ -53,11 +56,7 @@ const UserRepos = ({ repo, closeRepos }) => {
                   {repos.length > 0 && repos.map((rep) => (<Repo repo={rep} key={rep.id} />))}
                 </div>
             </div>
-            <div id="pagination-container">
-                <button id="previous" className={`pagination ${page <= 1 ? 'disabled' : ''}`}  onClick={previousPage}>Previous</button>
-                <div id="page">{ page }</div>
-                <button id="next" className="pagination" onClick={nextPage}>Next</button>
-            </div>
+            <Pagination page={page} nextPage={nextPage} previousPage={previousPage} />
             </>
           ) : <Error error={error} type={'repos'} /> }
           
